@@ -6,6 +6,7 @@ networking systems. This university network consists of the following devices:
 • Email server
 • V-LAN Connection
 • DNS server
+• Classless IP
 • Wireless Device (Access Point)
 • PCs
 • Smoke detector
