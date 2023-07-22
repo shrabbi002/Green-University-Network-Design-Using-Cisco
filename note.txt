@@ -1,0 +1,153 @@
+switch config------------
+
+Switch>enable
+Switch#
+Switch#configure terminal
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#
+Switch(config)#vlan 2
+Switch(config-vlan)#name A
+Switch(config-vlan)#vlan 3
+Switch(config-vlan)#name B
+Switch(config-vlan)#vlan 4
+Switch(config-vlan)#name C
+Switch(config-vlan)#vlan 10
+Switch(config-vlan)#name D
+Switch(config-vlan)#ex
+Switch(config)#
+Switch(config)#
+Switch(config)#int
+Switch(config)#interface range fa 0/1-2
+Switch(config-if-range)#sw
+Switch(config-if-range)#switchport acc
+Switch(config-if-range)#switchport access vlan 2
+Switch(config-if-range)#sw
+Switch(config-if-range)#switchport mo
+Switch(config-if-range)#switchport mode acc
+Switch(config-if-range)#switchport mode access 
+Switch(config-if-range)#int range fa 0/3-4
+Switch(config-if-range)#sw acc vlan 3
+Switch(config-if-range)#sw mode acc
+Switch(config-if-range)#ex
+Switch(config)#do sh vlan
+
+switch trunk-------------------
+
+
+Head(config)#int fa 0/24
+Head(config-if)#sw mode tr
+Head(config-if)#sw mode trunk 
+
+Switch>enable 
+Switch#config t
+Switch(config)#hostname Cow1
+Cow1(config)#int fa 0/24
+Cow1(config-if)#sw mode te
+Cow1(config-if)#sw mode tr
+
+Head(config)#vtp mode ser
+Head(config)#vtp mode server 
+Device mode already VTP SERVER.
+Head(config)#vtp domain exam
+Changing VTP domain name from NULL to exam
+
+Cow1(config-if)#ex
+Cow1(config)#vtp mode client
+Setting device to VTP CLIENT mode.
+Cow1(config)#vtp domain exam
+Domain name already set to exam.
+
+
+
+
+
+router config------------------------
+
+Head(config)#int fa 0/5
+Head(config-if)#sw mode tr
+
+City(config-if)#ex
+City(config)#int fa 0/0
+City(config-if)#ex
+City(config)#int fa 0/0.2
+
+Router(config)#host
+Router(config)#hostname City
+City(config)#int fa0/0
+City(config-if)#no sh
+City(config-if)#no shutdown 
+
+City(config-if)#
+%LINK-5-CHANGED: Interface FastEthernet0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0, changed state to up
+
+City(config-if)#ex
+City(config)#int fa 0/0
+City(config-if)#ex
+City(config)#int fa 0/0.2
+City(config-subif)#
+%LINK-5-CHANGED: Interface FastEthernet0/0.2, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface FastEthernet0/0.2, changed state to up
+
+City(config-subif)#ip add
+City(config-subif)#ip address 201.22.53.1 255.255.255.192
+
+% Configuring IP routing on a LAN subinterface is only allowed if that
+subinterface is already configured as part of an IEEE 802.10, IEEE 802.1Q,
+or ISL vLAN.
+
+City(config-subif)#encap
+City(config-subif)#encapsulation dot1q 2
+City(config-subif)#ip address 201.22.53.1 255.255.255.192
+
+Project==================================
+switch=============================
+
+
+Switch>en
+Switch#config t
+Enter configuration commands, one per line.  End with CNTL/Z.
+Switch(config)#host
+Switch(config)#hostname Main-Gub
+Main-Gub(config)#vlan 2
+Main-Gub(config-vlan)#name B		
+Main-Gub(config-vlan)#vlan 3
+Main-Gub(config-vlan)#name A
+Main-Gub(config)#vlan 4
+Main-Gub(config-vlan)#name C
+
+Main-Gub(config)#int
+Main-Gub(config)#interface range fa 0/3-4
+Main-Gub(config-if-range)#sw acc
+Main-Gub(config-if-range)#sw access vlan 2
+Main-Gub(config-if-range)#sw mode acc
+
+trunk========
+
+Main-Gub(config)#int fa 0/24
+Main-Gub(config-if)#sw mode tr
+
+Switch(config)#host
+Switch(config)#hostname C1
+C1(config)#int fa 0/24
+C1(config-if)#sw mode tr
+
+Main-Gub(config-if)#vtp mode ser
+Device mode already VTP SERVER.
+Main-Gub(config)#vtp domain Green
+Changing VTP domain name from NULL to Green
+
+C1(config-if)#ex
+C1(config)#vtp mode client
+Setting device to VTP CLIENT mode.
+C1(config)#vtp domain Green
+Domain name already set to Green.
+
+router==============
+
+City-R(config-subif)#encap
+City-R(config-subif)#encapsulation dot1q 2
+City-R(config-subif)#ip add
+City-R(config-subif)#ip address 201.22.53.1 255.255.255.128
