@@ -3,6 +3,8 @@ The aim of this project is to design the topology of the university network usin
 software Cisco Packet Tracer with the implementation of cable connection and wireless
 networking systems. 
 This university network consists of the following devices:
+
+
 • Router (2811) (2960)
 • Email server
 • V-LAN Connection
